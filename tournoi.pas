@@ -1,14 +1,17 @@
-UNIT
+UNIT tournoi;
 
 INTERFACE
-
 USES
+  crt
 
 TYPE tabdyni = ARRAY OF STRING;
      tabdyns = ARRAY OF INTEGER;
 
 VAR t1 : tabdyns;
     t2 : tabdyni;
+
+PROCEDURE tournois;
+IMPLEMENTATION
 
 FUNCTION result(VAR t1:tabdyn1; t2:tabdyn2);
     var i, x : integer;
