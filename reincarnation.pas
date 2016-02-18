@@ -18,7 +18,8 @@ begin
   l := length(nom);
   FOR i := 1 to l DO BEGIN
     IF (ord(nom[i]) < 65) or (ord(nom[i]) > 90) THEN BEGIN
-      WRITELN('Erreur');
+      WRITELN('Erreur : Le nom entree "',nom,'" n''est pas exclusivement des lettres majuscules');
+      halt;
     END
     else
     begin
@@ -67,10 +68,11 @@ END;
 ////////////////////////////////Tri/////////////////////////////////////////////
 FUNCTION partitionner(VAR inte : tabIntdyn;VAR str : tabStrdyn; debut, fin: INTEGER): INTEGER;
 VAR
-    i, j, pivot, tmp: INTEGER;
-    tmp1 : STRING;
+    i, j, pivot,tmp: INTEGER;
+    tmp1,pivotstr : STRING;
 BEGIN
     pivot := inte[debut];
+    pivotstr := str[debut];
     i := debut + 1;
     j := fin;
     WHILE (i <= j) DO
@@ -88,7 +90,9 @@ BEGIN
         END;
     END;
     inte[debut] := inte[j];
+    str[debut] := str[j];
     inte[j] := pivot;
+    str[j] := pivotstr;
     partitionner := j;
 END;
 
@@ -103,16 +107,17 @@ begin
     triRapideRec(inte,str,pivot+1,fin);
   end;
 end;
+
+procedure TriRapide(VAR inte : tabIntdyn;VAR str : tabStrdyn);
+begin
+  triRapideRec(inte,str,0,length(inte)-1);
+end;
 //////////////////////////////////Welcome///////////////////////////////////////
 PROCEDURE welcome;
 BEGIN
   ClrScr;
   WRITELN('Bienvenu dans la calculatrice du grand sage Shakacharaya');
 END;
-procedure TriRapide(VAR inte : tabIntdyn;VAR str : tabStrdyn);
-begin
-  triRapideRec(inte,str,0,length(inte)-1);
-end;
 /////////////////////////////////Principal//////////////////////////////////////
 PROCEDURE recin;
 VAR
