@@ -1,3 +1,4 @@
+// git@gitlab.etude.eisti.fr:rigauxdavi/Mini_Projet_Tri.git
 PROGRAM Application_tris;
 USES
   reincarnation,tournoi,crt;
