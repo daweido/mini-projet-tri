@@ -17,31 +17,10 @@ IMPLEMENTATION
 PROCEDURE wel_tournoi;
 BEGIN
   ClrScr;
-	WRITELN('Bienvenue');
+	WRITELN('Bienvenue aux classificateurs de tournois');
 	WRITELN('Veuillez entrer le nombre d''equipes dans la compétition : ');
 END;
-PROCEDURE tournoisfoot;
-BEGIN
-  ______                                                  __                 ___               __    __                ___    ___
- /\__  _\                                      __        /\ \              /'___\             /\ \__/\ \              /\_ \  /\_ \
- \/_/\ \/   ___   __  __  _ __    ___     ___ /\_\       \_\ \     __     /\ \__/  ___     ___\ \ ,_\ \ \____     __  \//\ \ \//\ \    
-    \ \ \  / __`\/\ \/\ \/\`'__\/' _ `\  / __`\/\ \      /'_` \  /'__`\   \ \ ,__\/ __`\  / __`\ \ \/\ \ '__`\  /'__`\  \ \ \  \ \ \
-     \ \ \/\ \L\ \ \ \_\ \ \ \/ /\ \/\ \/\ \L\ \ \ \    /\ \L\ \/\  __/    \ \ \_/\ \L\ \/\ \L\ \ \ \_\ \ \L\ \/\ \L\.\_ \_\ \_ \_\ \_
-      \ \_\ \____/\ \____/\ \_\ \ \_\ \_\ \____/\ \_\   \ \___,_\ \____\    \ \_\\ \____/\ \____/\ \__\\ \_,__/\ \__/.\_\/\____\/\____\
-       \/_/\/___/  \/___/  \/_/  \/_/\/_/\/___/  \/_/    \/__,_ /\/____/     \/_/ \/___/  \/___/  \/__/ \/___/  \/__/\/_/\/____/\/____/
-END;
 
-Procedure afficlass;
-BEGIN
-  ____    ___                                                              __
-/\  _`\ /\_ \                                                            /\ \__
-\ \ \/\_\//\ \      __      ____    ____     __    ___ ___      __    ___\ \ ,_\
-\ \ \/_/_\ \ \   /'__`\   /',__\  /',__\  /'__`\/' __` __`\  /'__`\/' _ `\ \ \/
- \ \ \L\ \\_\ \_/\ \L\.\_/\__, `\/\__, `\/\  __//\ \/\ \/\ \/\  __//\ \/\ \ \ \_
-  \ \____//\____\ \__/.\_\/\____/\/\____/\ \____\ \_\ \_\ \_\ \____\ \_\ \_\ \__\
-   \/___/ \/____/\/__/\/_/\/___/  \/___/  \/____/\/_/\/_/\/_/\/____/\/_/\/_/\/__/
-
-END;
 /////////////////////////////////Entree noms////////////////////////////////////
 PROCEDURE creanoms(VAR classement : tabclassement;x : INTEGER);
 VAR
@@ -101,8 +80,6 @@ BEGIN
     j := fin;
     WHILE (i <= j) DO
     BEGIN
-      //WHILE (j > debut) AND (classement.points[j] >= pivot) DO j := j-1;
-      //WHILE (i <= fin) AND (classement.points[i] < pivot) DO i := i+1;
       WHILE (i <= fin) AND (classement.points[i] >= pivot) DO i := i+1;
       WHILE (j > debut) AND (classement.points[j] < pivot) DO j := j-1;
         IF (i<j) THEN
@@ -224,7 +201,7 @@ BEGIN
     ELSE IF (lmax-length(nomss)) = 1 THEN nomss := nomss+'      '
     ELSE BEGIN
       ltmp := (lmax - length(nomss));
-      FOR j := 1 to ltmp+5 DO  nomss := nomss + ' ';
+      FOR j := 1 to ltmp+4 DO  nomss := nomss + ' ';
     END;
     classement.noms[i] := nomss;
   END;
@@ -233,11 +210,10 @@ END;
 /////////////////////////////Principal//////////////////////////////////////////
 PROCEDURE tournois;
 VAR
-	x,i,j,l,u : INTEGER;
+	x,i,l,u : INTEGER;
   esp : STRING;
 	classement : tabclassement;
 BEGIN
-
   esp :='';
 	wel_tournoi;
 	readln(x);
