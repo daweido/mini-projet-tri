@@ -1,7 +1,7 @@
 (Version française / French version)
 
 # Mini-Projet Tri
-Ceci est projet fait en première année du cycle préparatoire, codé en [Pascal](https://www.freepascal.org/) effectuant plusieurs application de différents tris.
+Ceci est un projet fait en première année du cycle préparatoire, codé en [Pascal](https://www.freepascal.org/) effectuant plusieurs application de différents tris.
 
 (Version anglaise / English version)
 
