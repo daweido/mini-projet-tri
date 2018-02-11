@@ -9,26 +9,29 @@ TYPE
 PROCEDURE recin;
 
 IMPLEMENTATION
-//////////////////////////////////calcul////////////////////////////////////////
+
+//////////////////////////////////Calcul////////////////////////////////////////
 FUNCTION entree_nom(nom : STRING) : INTEGER;
 VAR
   i,l,u : INTEGER;
-begin
+BEGIN
   u := 0;
   l := length(nom);
+
   FOR i := 1 to l DO BEGIN
     IF (ord(nom[i]) < 65) or (ord(nom[i]) > 90) THEN BEGIN
       WRITELN('Erreur : Le nom entree "',nom,'" n''est pas exclusivement des lettres majuscules');
       halt;
-    END
-    else
-    begin
+      END
+    ELSE BEGIN
       u := u + ((ord(nom[i]))-64);
-    end;
+    END;
   END;
+
   u := (u*47)+19;
   entree_nom := u;
 END;
+
 ///////////////////////////////////Conversion///////////////////////////////////
 FUNCTION StrAInt (p : INTEGER) : INTEGER;
 VAR
@@ -37,23 +40,25 @@ VAR
 BEGIN
   ope := IntToStr(p);
   anne := 0;
-  for i := 1 to length(ope) do anne := anne + StrToInt(ope[i]);
+  FOR i := 1 TO length(ope) DO
+    anne := anne + StrToInt(ope[i]);
   StrAInt := anne;
 END;
+
 ////////////////////////////////Reincarnation///////////////////////////////////
 PROCEDURE reincarnate(VAR str : tabStrdyn;VAR inte : tabIntdyn; x : INTEGER);
 VAR
   nom : STRING;
   i,p : INTEGER;
 BEGIN
-  FOR i := 0 to x-1 do BEGIN
+  FOR i := 0 to (x-1) do BEGIN
     nom := str[i];
     inte[i] := entree_nom(nom);
     p := inte[i];
     inte[i] := StrAInt(p);
   END;
-
 END;
+
 /////////////////////////////////Affichage//////////////////////////////////////
 PROCEDURE affiche(str : tabStrdyn; inte : tabIntdyn;x : INTEGER );
 VAR
@@ -61,10 +66,13 @@ VAR
 BEGIN
   WRITELN('Voici les prenoms selon leur avancement spirituel :');
   FOR i := 0 to x-1 DO BEGIN
-    if (i = (x-1)) then WRITELN(str[i],' (',inte[i],')')
-    ELSE WRITE(str[i],' (',inte[i],') - ');
+    if (i = (x-1)) then
+      WRITELN(str[i],' (',inte[i],')')
+    ELSE
+      WRITE(str[i],' (',inte[i],') - ');
   END;
 END;
+
 ////////////////////////////////Tri/////////////////////////////////////////////
 FUNCTION partitionner(VAR inte : tabIntdyn;VAR str : tabStrdyn; debut, fin: INTEGER): INTEGER;
 VAR
@@ -77,10 +85,14 @@ BEGIN
     j := fin;
     WHILE (i <= j) DO
     BEGIN
-        WHILE (i <= fin) AND (inte[i] < pivot) DO i := i+1;
-        WHILE (j > debut) AND (inte[j] >= pivot) DO j := j-1;
-        IF (i<j) THEN
-        BEGIN
+
+        WHILE (i <= fin) AND (inte[i] < pivot) DO
+          i := i+1;
+
+        WHILE (j > debut) AND (inte[j] >= pivot) DO
+          j := j-1;
+
+        IF (i<j) THEN BEGIN
             tmp := inte[i];
             tmp1 := str[i];
             str[i] := str[j];
@@ -89,6 +101,7 @@ BEGIN
             inte[j] := tmp;
         END;
     END;
+
     inte[debut] := inte[j];
     str[debut] := str[j];
     inte[j] := pivot;
@@ -100,18 +113,18 @@ PROCEDURE triRapideRec(VAR inte : tabIntdyn;VAR str : tabStrdyn; debut , fin : I
 VAR
   pivot : INTEGER;
 begin
-  IF (debut < fin) THEN
-  begin
+  IF (debut < fin) THEN BEGIN
     pivot := partitionner(inte,str,debut,fin);
     triRapideRec(inte,str,debut,pivot-1);
     triRapideRec(inte,str,pivot+1,fin);
-  end;
-end;
+  END;
+END;
 
-procedure TriRapide(VAR inte : tabIntdyn;VAR str : tabStrdyn);
-begin
+PROCEDURE TriRapide(VAR inte : tabIntdyn;VAR str : tabStrdyn);
+BEGIN
   triRapideRec(inte,str,0,length(inte)-1);
-end;
+END;
+
 //////////////////////////////////Affichage/////////////////////////////////////
 PROCEDURE affireinc;
 BEGIN
@@ -140,7 +153,7 @@ VAR
 BEGIN
 welcome;
 WRITELN('Combien de noms voulez-vous entrer ?');
-readln(x);
+READLN(x);
 setlength(str,x);
 setlength(inte,x);
 WRITELN('Veuillez entrer chaque nom en majuscule un par un :');
@@ -148,9 +161,12 @@ FOR i := 0 to x-1 DO BEGIN
   readln(noms);
   str[i] := noms;
 END;
+
 WRITELN('');
+
 reincarnate(str,inte,x);
 TriRapide(inte,str);
 affiche(str,inte,x);
 END;
+
 END.

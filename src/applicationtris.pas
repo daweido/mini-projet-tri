@@ -1,4 +1,3 @@
-// git@gitlab.etude.eisti.fr:rigauxdavi/Mini_Projet_Tri.git
 PROGRAM Application_tris;
 USES
   reincarnation,tournoi,crt;
@@ -17,8 +16,12 @@ BEGIN
   WRITELN('Que voulez vous faire ?');
   WRITELN('1. Reincarnation');
   WRITELN('2. Tournoi de football');
+
   READLN(i);
-  IF (i = '1') THEN recin
-  ELSE IF (i = '2') THEN tournois
-  ELSE WRITELN('Erreur : Mauvaise entree');
+  IF (i = '1') THEN
+    recin
+  ELSE IF (i = '2') THEN
+    tournois
+  ELSE
+    WRITELN('Erreur : Mauvaise entree');
 END.
